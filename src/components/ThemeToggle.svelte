@@ -9,8 +9,10 @@
     aria-label="Toggle theme"
   >
     {#if isDarkMode}
+      <!-- Show sun icon when in dark mode (to switch to light) -->
       <span class="icon sun"></span>
     {:else}
+      <!-- Show moon icon when in light mode (to switch to dark) -->
       <span class="icon moon"></span>
     {/if}
   </button>
@@ -29,7 +31,8 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+      border: 1px solid var(--border-color);
   
       &:hover {
         transform: scale(1.1);

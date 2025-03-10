@@ -1,4 +1,12 @@
 :root {
+    /* Light theme variables */
+    --primary-color: #2563eb;
+    --secondary-color: #4f46e5;
+    --background-color: #ffffff;
+    --text-color: #1f2937;
+    --border-color: #e5e7eb;
+    --sidebar-width: 250px;
+
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
@@ -7,17 +15,45 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
+}
+
+/* Dark theme variables */
+html.dark {
+    --primary-color: #3b82f6;
+    --secondary-color: #6366f1;
+    --background-color: #111827;
+    --text-color: #f3f4f6;
+    --border-color: #374151;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+}
   
-  * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
   
-  button {
+button {
     border: none;
     background: none;
     cursor: pointer;
     font: inherit;
-  }
+}
+
+/* Add transition for smooth theme switching */
+a, p, h1, h2, h3, h4, h5, h6, div, section {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Ensure input fields follow the theme */
+input, textarea, select {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
