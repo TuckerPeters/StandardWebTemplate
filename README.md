@@ -1,270 +1,58 @@
-# StandardWebTemplate - Professional Svelte Application
+# Habits of Mind AI - Proof of Concept
 
-A modern, responsive web template built with Svelte, TypeScript, and SCSS. This template provides a solid foundation for building professional web applications with features like dark mode support, responsive design, and component-based architecture.
+A demonstration of how AI can help students develop the 16 Habits of Mind without giving them direct answers.
 
-![StandardWebTemplate Screenshot](https://placeholder.pics/svg/800x400/DEDEDE/555555/StandardWebTemplate)
+## Overview
 
-## Table of Contents
-
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Development](#development)
-  - [Building for Production](#building-for-production)
-- [Project Structure](#project-structure)
-- [Understanding Svelte](#understanding-svelte)
-  - [What is Svelte?](#what-is-svelte)
-  - [Component Structure](#component-structure)
-  - [Reactivity](#reactivity)
-  - [Styling in Svelte](#styling-in-svelte)
-  - [Transitions and Animations](#transitions-and-animations)
-- [Customization](#customization)
-- [Contributing](#contributing)
-- [License](#license)
+This project showcases a new approach to educational AI that guides students through the thinking process, rather than simply providing answers. Based on the 16 Habits of Mind framework by Arthur L. Costa and Bena Kallick, this web application helps students develop essential thinking dispositions that lead to success in academic and real-world contexts.
 
 ## Features
 
-- **Modern Tech Stack**: Built with Svelte, TypeScript, and Vite for a lightning-fast development experience
-- **Component-Based Architecture**: Modular design with reusable components
-- **Responsive Design**: Looks great on all devices from mobile to desktop
-- **Dark Mode Support**: Built-in theme toggle with smooth transitions
-- **SCSS Integration**: For powerful styling capabilities
-- **TypeScript**: Type safety throughout the application
-- **Routing**: Client-side navigation using svelte-routing
-- **Toast Notifications**: Built-in notification system
-- **Performance Optimized**: Fast loading and smooth interactions
+- **Habit Explorer:** Browse and learn about all 16 Habits of Mind
+- **Habit Coach:** Get AI guidance on applying specific habits to your learning challenges
+- **Problem Solver's Workshop:** Work through problems with guided prompts that help you apply Habits of Mind
+- **Reflection Tool:** Receive feedback on your work focused on thinking habits, not content correctness
+- **Lesson Planner:** For educators to integrate Habits of Mind into curriculum
 
-## Getting Started
+## Running the Project
 
-### Prerequisites
+To run the project locally:
 
-- [Node.js](https://nodejs.org/) (version 14 or later)
-- npm (usually comes with Node.js) or [yarn](https://yarnpkg.com/)
-
-### Installation
-
-1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/StandardWebTemplate.git
-cd StandardWebTemplate
-```
-
-2. Install dependencies:
-```bash
+# Install dependencies
 npm install
-# or
-yarn install
-```
 
-### Development
-
-To start the development server:
-
-```bash
+# Start the development server
 npm run dev
-# or
-yarn dev
-```
 
-This will start the development server on `http://localhost:5173`. The app will automatically reload if you change any of the source files.
-
-### Building for Production
-
-To build the app for production:
-
-```bash
+# Build for production
 npm run build
-# or
-yarn build
 ```
 
-To preview the production build:
+## Technology Stack
 
-```bash
-npm run preview
-# or
-yarn preview
-```
+- Svelte 4
+- TypeScript
+- CSS/SCSS for styling
+- Vite for building and development
 
-## Project Structure
+## About the Habits of Mind
 
-```
-StandardWebTemplate/
-├── index.html            # Entry HTML file
-├── package.json          # Project dependencies and scripts
-├── tsconfig.json         # TypeScript configuration
-├── vite.config.ts        # Vite configuration
-└── src/
-    ├── app.css           # Global CSS
-    ├── App.svelte        # Root Svelte component
-    ├── main.ts           # Application entry point
-    ├── components/       # Reusable components
-    │   ├── Footer.svelte
-    │   ├── Header.svelte
-    │   ├── Sidebar.svelte
-    │   ├── ThemeToogle.svelte
-    │   └── Toast.svelte
-    └── routes/           # Page components
-        ├── About.svelte
-        ├── Contact.svelte
-        ├── Features.svelte
-        └── Home.svelte
-```
+The 16 Habits of Mind are dispositions that help students approach problems intelligently when they don't immediately know the answer. Developed by Arthur L. Costa and Bena Kallick, these habits support lifelong learning and success. Learn more at [The Institute for Habits of Mind](https://www.habitsofmindinstitute.org/).
 
-## Understanding Svelte
+## Proof of Concept
 
-### What is Svelte?
+This is a proof of concept demonstration showing how AI can be leveraged in education to develop thinking skills rather than replacing them. The AI prompts in this application are designed to:
 
-Svelte is a modern JavaScript framework for building user interfaces. Unlike traditional frameworks like React or Vue that do most of their work in the browser, Svelte shifts that work into a compile step that happens when you build your app. This results in highly-optimized vanilla JavaScript that directly manipulates the DOM, which can make Svelte apps very fast.
-
-### Component Structure
-
-In this template, Svelte components are used extensively. A typical Svelte component consists of three sections:
-
-1. **Script**: Contains the JavaScript/TypeScript logic
-```html
-<script lang="ts">
-  // Component logic goes here
-  let count = 0;
-  
-  function increment() {
-    count += 1;
-  }
-</script>
-```
-
-2. **HTML**: The markup template
-```html
-<button on:click={increment}>
-  Clicked {count} times
-</button>
-```
-
-3. **Style**: Component-specific CSS/SCSS
-```html
-<style lang="scss">
-  button {
-    background-color: #ff3e00;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 0.5em 1em;
-    
-    &:hover {
-      background-color: #ff6b31;
-    }
-  }
-</style>
-```
-
-### Reactivity
-
-Svelte's reactivity is based on variable assignments. When you update a variable that's used in your template, Svelte automatically updates the DOM to reflect the change:
-
-```html
-<script>
-  let count = 0;
-  
-  function increment() {
-    count += 1;  // This triggers an update!
-  }
-  
-  $: doubled = count * 2;  // Reactive declarations
-</script>
-
-<p>{count} doubled is {doubled}</p>
-<button on:click={increment}>Increment</button>
-```
-
-### Styling in Svelte
-
-In this template, we use SCSS for styling components. Styles in Svelte are scoped by default, meaning they only apply to the component they're defined in. You can use the `:global()` modifier to apply styles globally.
-
-```html
-<style lang="scss">
-  /* This only applies to <p> elements in this component */
-  p {
-    color: blue;
-  }
-  
-  /* This applies to all .button elements in the app */
-  :global(.button) {
-    background-color: green;
-  }
-  
-  /* You can use SCSS nesting */
-  .card {
-    padding: 1rem;
-    
-    &:hover {
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .title {
-      font-weight: bold;
-    }
-  }
-</style>
-```
-
-### Transitions and Animations
-
-This template makes use of Svelte's built-in transition system. You can find examples in the route components:
-
-```html
-<script>
-  import { fade } from 'svelte/transition';
-</script>
-
-<div transition:fade={{ duration: 200 }}>
-  This content will fade in and out
-</div>
-```
-
-## Customization
-
-### Themes
-
-The template includes a dark and light theme. You can customize the colors in `App.svelte`:
-
-```css
-:global(html) {
-  --primary-color: #2563eb;
-  --secondary-color: #4f46e5;
-  --background-color: #ffffff;
-  --text-color: #1f2937;
-  --border-color: #e5e7eb;
-  
-  &.dark {
-    --primary-color: #3b82f6;
-    --secondary-color: #6366f1;
-    --background-color: #111827;
-    --text-color: #f3f4f6;
-    --border-color: #374151;
-  }
-}
-```
-
-### Adding New Routes
-
-1. Create a new component in the `src/routes/` directory
-2. Add a new `<Route>` in `App.svelte`:
-
-```html
-<Route path="/new-page" component={NewPage} />
-```
-
-3. Add a link to the new route in `Header.svelte`:
-
-```html
-<Link to="/new-page">New Page</Link>
-```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+1. Ask Socratic questions that prompt reflection
+2. Guide students through their own problem-solving process
+3. Provide feedback on thinking habits rather than content correctness
+4. Customize learning experiences based on individual needs
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is for demonstration purposes only.
+
+---
+
+Created as a showcase for the Habits of Mind Institute.

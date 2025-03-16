@@ -9,13 +9,19 @@
   import ThemeToggle from './components/ThemeToggle.svelte';
   import Home from './routes/Home.svelte';
   import About from './routes/About.svelte';
-  import Features from './routes/Features.svelte';
-  import Contact from './routes/Contact.svelte';
+  import HabitCoach from './routes/HabitCoach.svelte';
+  import HabitExplorer from './routes/HabitExplorer.svelte';
+  import ThinkingTools from './routes/ThinkingTools.svelte';
+  import ProblemSolver from './routes/thinking-tools/ProblemSolver.svelte';
+  import Reflection from './routes/thinking-tools/Reflection.svelte';
+  import LessonPlanner from './routes/thinking-tools/LessonPlanner.svelte';
+  import SelfAssessment from './routes/thinking-tools/SelfAssessment.svelte';
   import './app.css';
   
   export let url = "";
   let isSidebarOpen = false;
   let isDarkMode = false;
+  let isPageLoaded = false;
 
   // Apply the theme to the html element
   function applyTheme(dark: boolean) {
@@ -48,6 +54,34 @@
         applyTheme(isDarkMode);
       }
     });
+    
+    // Listen for custom event to close sidebar
+    window.addEventListener('closesidebar', () => {
+      isSidebarOpen = false;
+    });
+    
+    // Listen for escape key to close sidebar
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isSidebarOpen) {
+        isSidebarOpen = false;
+      }
+    });
+    
+    // Set page as loaded after a short delay
+    setTimeout(() => {
+      isPageLoaded = true;
+    }, 100);
+    
+    return () => {
+      window.removeEventListener('closesidebar', () => {
+        isSidebarOpen = false;
+      });
+      window.removeEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isSidebarOpen) {
+          isSidebarOpen = false;
+        }
+      });
+    };
   });
 
   const toggleSidebar = () => {
@@ -64,7 +98,7 @@
 </script>
 
 <Router {url}>
-  <div class="app-container" transition:fade={{ duration: 200 }}>
+  <div class="app-container" class:loaded={isPageLoaded} transition:fade={{ duration: 300 }}>
     <Header {toggleSidebar} />
     
     <main class="main-content">
@@ -73,8 +107,16 @@
       <div class="content-wrapper" class:sidebar-open={isSidebarOpen}>
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
-        <Route path="/features" component={Features} />
-        <Route path="/contact" component={Contact} />
+        <Route path="/habit-coach" component={HabitCoach} />
+        
+        <!-- These pages will be implemented later -->
+        <Route path="/habit-explorer" component={HabitExplorer} />
+        <Route path="/thinking-tools/problem-solver" component={ProblemSolver} />
+        <Route path="/thinking-tools/reflection" component={Reflection} />
+        <Route path="/thinking-tools/lesson-planner" component={LessonPlanner} />
+        <Route path="/thinking-tools/self-assessment" component={SelfAssessment} />
+        <Route path="/thinking-tools" component={ThinkingTools} />
+        <Route path="/thinking-tools/*"></Route>
       </div>
     </main>
 
@@ -91,35 +133,80 @@
     color: var(--text-color);
     display: flex;
     flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    
+    &.loaded {
+      opacity: 1;
+    }
   }
 
   .main-content {
     display: flex;
     flex: 1;
-    min-height: calc(100vh - 140px);
+    min-height: calc(100vh - var(--header-height));
     position: relative;
   }
 
   .content-wrapper {
     flex: 1;
-    padding: 2rem;
+    padding: var(--spacing-xl) 0;
     margin-left: 0;
-    transition: margin-left 0.3s ease;
+    transition: all var(--transition-speed);
     width: 100%;
 
     &.sidebar-open {
-      @media (min-width: 768px) {
-        margin-left: var(--sidebar-width);
-        width: calc(100% - var(--sidebar-width));
+      @media (min-width: 769px) {
+        margin-left: var(--sidebar-expanded-width);
+        width: calc(100% - var(--sidebar-expanded-width));
       }
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     .content-wrapper {
-      padding: 1rem;
+      padding: var(--spacing-md) 0;
     }
   }
 
-  // Keep all global styles in app.css
+  .coming-soon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    text-align: center;
+    padding: var(--spacing-xl);
+    max-width: 600px;
+    margin: 0 auto;
+    
+    h2 {
+      font-size: 2rem;
+      margin: var(--spacing-md) 0;
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+    
+    p {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-xl);
+    }
+  }
+  
+  .coming-soon-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--highlight-color);
+    border-radius: 50%;
+    color: var(--primary-color);
+    
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
 </style>

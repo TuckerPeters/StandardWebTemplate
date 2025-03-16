@@ -1,14 +1,17 @@
 {
-    "name": "svelte-professional-template",
+    "name": "habits-of-mind-ai",
     "version": "1.0.0",
     "type": "module",
     "scripts": {
-      "dev": "vite",
-      "build": "vite build",
-      "preview": "vite preview",
+      "dev": "node --no-warnings node_modules/vite/bin/vite.js",
+      "start": "node --no-warnings node_modules/vite/bin/vite.js",
+      "build": "node --no-warnings node_modules/vite/bin/vite.js build",
+      "preview": "node --no-warnings node_modules/vite/bin/vite.js preview",
       "check": "svelte-check --tsconfig ./tsconfig.json"
     },
     "dependencies": {
+      "marked": "^15.0.7",
+      "openai": "^4.80.1",
       "svelte": "^4.2.0",
       "svelte-routing": "^2.0.0"
     },
